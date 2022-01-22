@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+  <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="/webjars/bootstrap-icons/font/bootstrap-icons.css"/>
+  <title>Conference Track Management</title>
+</head>
+<body>
+
+<div class="container">
+  <div class="container-fluid bg-light p-5">
+    <h1>Conference Track Management</h1>
+    <p>
+    <a class="btn btn-primary" href="#">Split talks into tracks</a>
+    </p>
+  </div>
+
+  <table class="table caption-top my-4">
+    <caption>List of talks</caption>
+    <thead class="table-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Duration</th>
+      <th scope="col">&nbsp;</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="talk,index: ${allTalks}">
+      <th scope="row" th:text="${index.count}">1</th>
+      <td th:text="${talk.getTitle()}">Overdoing it in Python</td>
+      <td th:text="|${talk.getDuration()} min|">45min</td>
+      </td>
+      <td>
+        <form method="post"
+              action="#" th:action="@{/deleteTalk/{id}(id=${talk.getId()})}"
+              class="text-center">
+          <button type="submit" class="btn btn-danger">
+            <i class="bi bi-trash"></i> Delete
+          </button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
