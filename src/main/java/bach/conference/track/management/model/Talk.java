@@ -12,9 +12,7 @@ public class Talk {
     private final String title;
     private final Long duration;
 
-
-    @SuppressWarnings("PMD.CommentDefaultAccessModifier")
-    Talk(final String title, final Long duration) {
+    public Talk(final String title, final Long duration) {
         this.title = title;
         this.duration = duration;
     }

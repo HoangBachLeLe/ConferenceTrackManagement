@@ -1,0 +1,96 @@
+package bach.conference.track.management.service;
+
+import bach.conference.track.management.model.Talk;
+import bach.conference.track.management.repository.TalkRepository;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
+import org.springframework.stereotype.Service;
+
+@Service
+public class TalkService {
+
+    @SuppressWarnings("PMD.LongVariable")
+    private static final LocalTime MORNINGSESSIONBEGIN = LocalTime.of(9, 0);
+    private static final LocalTime MORNINGSESSIONEND = LocalTime.of(12, 0);
+    @SuppressWarnings("PMD.LongVariable")
+    private static final LocalTime AFTERNOONSESSIONBEGIN = LocalTime.of(13, 0);
+    @SuppressWarnings("PMD.LongVariable")
+    private static final LocalTime AFTERNOONSESSIONEND = LocalTime.of(17, 0);
+
+    private transient LocalTime lastTalkEnd = LocalTime.of(16, 0);
+
+    private static final String TIMEFORMAT = "hh:mm a";
+
+    private final transient TalkRepository repository;
+
+    public TalkService(final TalkRepository repository) {
+        this.repository = repository;
+    }
+
+    public List<Talk> findAllTalks() {
+        return repository.findAll();
+    }
+
+    public List<List<List<String>>> splitTalksIntoTracks() {
+        final List<Talk> allTalks = new ArrayList<>(this.findAllTalks());
+        final List<List<List<String>>> tracks = new ArrayList<>();
+
+        while (!allTalks.isEmpty()) {
+            tracks.add(this.splitTalksIntoSession(allTalks, MORNINGSESSIONBEGIN, MORNINGSESSIONEND, "Lunch"));
+            tracks.add(this.splitTalksIntoSession(allTalks, AFTERNOONSESSIONBEGIN, AFTERNOONSESSIONEND, "Networking Event"));
+        }
+
+        for (final List<List<String>> track : tracks) {
+            for (final List<String> talks : track) {
+                final String replaceTime = AFTERNOONSESSIONEND.format(DateTimeFormatter.ofPattern(TIMEFORMAT));
+                if (talks.contains(replaceTime)) {
+                    talks.set(
+                            talks.indexOf(replaceTime),
+                            lastTalkEnd.format(DateTimeFormatter.ofPattern(TIMEFORMAT))
+                    );
+                }
+            }
+        }
+        return tracks;
+    }
+
+    @SuppressWarnings({"PMD.OnlyOneReturn", "PMD.DataflowAnomalyAnalysis", "PMD.LawOfDemeter", "PMD.ConfusingTernary"})
+    private List<List<String>> splitTalksIntoSession(final List<Talk> talks, final LocalTime sessionBegin, final LocalTime sessionEnd,
+            final String talkName) {
+        final List<List<String>> session = new ArrayList<>();
+        LocalTime sessionTime = sessionBegin;
+        while (!talks.isEmpty()) {
+
+            final Talk talk = talks.get(0);
+            final Long duration = talk.getDuration();
+            final LocalTime sessionTimeNew = sessionTime.plusMinutes(duration);
+
+            if (!sessionTimeNew.isAfter(sessionEnd)) {
+                session.add(List.of(
+                        sessionTime.format(DateTimeFormatter.ofPattern(TIMEFORMAT)),
+                        talk.getTitle(),
+                        talk.getDuration().toString()
+                ));
+                talks.remove(0);
+                sessionTime = sessionTimeNew;
+            } else {
+                session.add(new ArrayList<>(List.of(
+                        sessionEnd.format(DateTimeFormatter.ofPattern(TIMEFORMAT)),
+                        talkName,
+                        ""
+                )));
+                lastTalkEnd = Stream.of(lastTalkEnd, sessionTime).max(LocalTime::compareTo).get();
+                return session;
+            }
+        }
+        session.add(new ArrayList<>(List.of(
+                sessionEnd.format(DateTimeFormatter.ofPattern(TIMEFORMAT)),
+                talkName,
+                ""
+        )));
+        return session;
+    }
+}
