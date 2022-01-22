@@ -179,4 +179,13 @@ class TalkServiceTest {
 
         verify(repository).save(any(Talk.class));
     }
+
+    @Test
+    void addTalkByInputString() {
+        String inputString = "Spring 40min";
+
+        service.addTalkByInputString(inputString);
+
+        verify(repository).save(any(Talk.class));
+    }
 }

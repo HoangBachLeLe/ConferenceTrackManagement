@@ -114,6 +114,44 @@
 
   <hr>
 
+  <form
+      class="row gy-2 gx-3 align-items-center"
+      method="post"
+      action="#"
+      th:action="@{/addTalkByInputString}"
+      th:object="${inputStringForm}"
+  >
+
+    <div class="row">
+      <div class="col-4">
+        <div class="form-floating">
+          <input
+              type="text"
+              class="form-control text-center"
+              id="inputString"
+              placeholder="inputString"
+              th:field="*{inputString}"
+              th:classappend="${#fields.hasErrors('inputString')} ? 'is-invalid' : ''"
+          >
+          <div
+              class="invalid-feedback"
+              th:if="${#fields.hasErrors('inputString')}"
+              th:errors="*{inputString}"
+          ></div>
+          <label for="inputString">Input String</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-end">
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Add talk</button>
+      </div>
+    </div>
+  </form>
+
+  <hr>
+
   <table class="table caption-top my-4">
     <caption>List of talks</caption>
     <thead class="table-dark">

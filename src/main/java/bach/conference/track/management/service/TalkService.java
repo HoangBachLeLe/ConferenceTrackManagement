@@ -6,6 +6,7 @@ import bach.conference.track.management.repository.TalkRepository;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 import org.springframework.stereotype.Service;
@@ -111,5 +112,23 @@ public class TalkService {
 
     public void saveTalk(final String title, final long duration) {
         repository.save(new Talk(title, duration));
+    }
+
+    public void addTalkByInputString(final String inputString) {
+        final List<String> strings = new ArrayList<>(Arrays.asList(inputString.split(" ")));
+        final String durationString = strings.remove(strings.size() - 1);
+
+        long duration;
+        if ("lightning".equals(durationString)) {
+            duration = 5L;
+        } else {
+            duration = Integer.parseInt(
+                    durationString.replace("min", "")
+            );
+        }
+
+        final String title = String.join(" ", strings);
+
+        this.saveTalk(title, duration);
     }
 }

@@ -1,5 +1,6 @@
 package bach.conference.track.management.controller;
 
+import bach.conference.track.management.form.InputStringForm;
 import bach.conference.track.management.form.TalkForm;
 import bach.conference.track.management.model.Talk;
 import bach.conference.track.management.service.TalkService;
@@ -27,6 +28,7 @@ public class TalkController {
     public String getIndex(final Model model) {
         model.addAttribute("allTalks", service.findAllTalks());
         model.addAttribute("talkForm", new TalkForm("", ""));
+        model.addAttribute("inputStringForm", new InputStringForm("Spring lightning"));
         return "index";
     }
 
@@ -64,6 +66,7 @@ public class TalkController {
     public String addTalk(@Valid final TalkForm form, final BindingResult bindingResult, final Model model,
             final RedirectAttributes redirectAttr) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("inputStringForm", new InputStringForm("Spring lightning"));
             model.addAttribute("allTalks", service.findAllTalks());
             return "index";
         }
@@ -78,6 +81,24 @@ public class TalkController {
                         + form.getTitle() + " ("
                         + form.getDuration() + " min)"
         );
+        return "redirect:/";
+    }
+
+    @SuppressWarnings("PMD.OnlyOneReturn")
+    @PostMapping("/addTalkByInputString")
+    public String addTalkByInputString(@Valid final InputStringForm form, final BindingResult bindingResult, final Model model,
+            final RedirectAttributes redirectAttr) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("talkForm", new TalkForm("", ""));
+            model.addAttribute("allTalks", service.findAllTalks());
+            return "index";
+        }
+        service.addTalkByInputString(form.getInputString());
+
+        redirectAttr.addFlashAttribute("message",
+                "New talk was added: " + form.getInputString()
+        );
+
         return "redirect:/";
     }
 }

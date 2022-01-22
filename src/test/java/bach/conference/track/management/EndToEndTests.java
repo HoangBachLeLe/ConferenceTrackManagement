@@ -42,6 +42,7 @@ public class EndToEndTests {
                 .doesNotContain("Spring Boot")
                 .doesNotContain("55 min");
 
+        // add talk 'Spring Boot' (55 min)
         response = this.template.postForEntity(
                 "/addTalk",
                 formData(of(
@@ -71,6 +72,22 @@ public class EndToEndTests {
         assertThat(response.getStatusCode()).isEqualTo(OK);
         assertThat(response.getBody())
                 .doesNotContain("Spring Boot");
+
+        // add talk 'Spring Boot' lightning
+        response = this.template.postForEntity(
+                "/addTalkByInputString",
+                formData(of(
+                        "inputString", "Spring Boot lightning"
+                )),
+                String.class
+        );
+        assertThat(response.getStatusCode()).isEqualTo(FOUND);
+
+        // check if talk 'Spring Boot' is in table
+        response = this.template.getForEntity("/", String.class);
+        assertThat(response.getStatusCode()).isEqualTo(OK);
+        assertThat(response.getBody())
+                .contains("Spring Boot");
     }
 
     @Test

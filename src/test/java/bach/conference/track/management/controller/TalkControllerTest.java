@@ -89,4 +89,29 @@ class TalkControllerTest {
 
         verify(service, never()).saveTalk(anyString(), any(Integer.class));
     }
+
+    @Test
+    void addTalkByInputStringValid() throws Exception {
+        String inputString = "Spring lightning";
+        mvc.perform(post("/addTalkByInputString")
+                        .param("inputString", inputString))
+                .andExpect(status().isFound())
+                .andExpect(redirectedUrl("/"))
+                .andExpect(view().name("redirect:/"));
+
+        verify(service).addTalkByInputString(inputString);
+    }
+
+    @Test
+    void addTalkByInputStringInvalid() throws Exception {
+        mvc.perform(post("/addTalkByInputString")
+                        .param("inputString", ""))
+                .andExpect(status().isOk())
+                .andExpect(view().name("index"))
+                .andExpect(content().string(containsString("Conference Track Management")))
+                .andExpect(content().string(containsString("([a-zA-Z]+\\s?)+\\s(\\d{1,2}min)|(lightning)")))
+                .andExpect(content().string(not(containsString("New talk was added"))));
+
+        verify(service, never()).addTalkByInputString(anyString());
+    }
 }
