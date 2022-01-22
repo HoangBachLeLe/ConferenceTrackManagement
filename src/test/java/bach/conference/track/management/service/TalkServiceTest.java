@@ -34,7 +34,7 @@ class TalkServiceTest {
     @DisplayName("Test inputs are as on pdf file")
     @Test
     void splitTalksIntoTracks1() {
-        when(repository.findAll()).thenReturn(List.of(
+        List<Talk> allTalks = List.of(
                 new Talk("Writing Fast Tests Against Enterprise Rails", 60L),
                 new Talk("Overdoing it in Python", 45L),
                 new Talk("Lua for the Masses", 30L),
@@ -54,9 +54,12 @@ class TalkServiceTest {
                 new Talk("A World Without HackerNews", 30L),
                 new Talk("Ruby on Rails Legacy App Maintenance", 60L),
                 new Talk("Rails for Python Developers", 5L)
-        ));
+        );
 
-        List<List<String>> tracks = service.splitTalksIntoTracks().stream().flatMap(Collection::stream).toList();
+        List<List<String>> tracks = service.splitTalksIntoTracks(allTalks)
+                .stream()
+                .flatMap(Collection::stream)
+                .toList();
 
         assertThat(tracks).containsExactly(
                 List.of("09:00 AM", "Writing Fast Tests Against Enterprise Rails", "60"),
@@ -88,14 +91,17 @@ class TalkServiceTest {
     @DisplayName("morning talk sessions must finish by 12 noon")
     @Test
     void splitTalksIntoTracks2() {
-        when(repository.findAll()).thenReturn(List.of(
+        List<Talk> allTalks = List.of(
                 new Talk("Talk 1", 60L),
                 new Talk("Talk 2", 45L),
                 new Talk("Talk 3", 30L),
                 new Talk("Talk 4", 50L)
-        ));
+        );
 
-        List<List<String>> tracks = service.splitTalksIntoTracks().stream().flatMap(Collection::stream).toList();
+        List<List<String>> tracks = service.splitTalksIntoTracks(allTalks)
+                .stream()
+                .flatMap(Collection::stream)
+                .toList();
 
         assertThat(tracks).containsExactly(
                 List.of("09:00 AM", "Talk 1", "60"),
@@ -110,11 +116,14 @@ class TalkServiceTest {
     @DisplayName("only one talk")
     @Test
     void splitTalksIntoTracks3() {
-        when(repository.findAll()).thenReturn(List.of(
+        List<Talk> allTalks = List.of(
                 new Talk("Talk 1", 30L)
-        ));
+        );
 
-        List<List<String>> tracks = service.splitTalksIntoTracks().stream().flatMap(Collection::stream).toList();
+        List<List<String>> tracks = service.splitTalksIntoTracks(allTalks)
+                .stream()
+                .flatMap(Collection::stream)
+                .toList();
 
         assertThat(tracks).containsExactly(
                 List.of("09:00 AM", "Talk 1", "30"),

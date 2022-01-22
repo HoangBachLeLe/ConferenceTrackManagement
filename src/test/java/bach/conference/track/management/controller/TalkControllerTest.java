@@ -1,6 +1,7 @@
 package bach.conference.track.management.controller;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -8,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import bach.conference.track.management.service.TalkService;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -40,6 +42,16 @@ class TalkControllerTest {
                 .andExpect(view().name("tracks"))
                 .andExpect(content().string(containsString("Tracks")));
 
-        verify(service).splitTalksIntoTracks();
+        verify(service).splitTalksIntoTracks(any(List.class));
+    }
+
+    @Test
+    void randomOrder() throws Exception {
+        mvc.perform(get("/randomOrder"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("tracks"))
+                .andExpect(content().string(containsString("Tracks")));
+
+        verify(service).splitTalksIntoTracks(any(List.class));
     }
 }

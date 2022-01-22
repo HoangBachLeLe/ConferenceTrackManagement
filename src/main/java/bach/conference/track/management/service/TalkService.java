@@ -9,18 +9,17 @@ import java.util.List;
 import java.util.stream.Stream;
 import org.springframework.stereotype.Service;
 
+@SuppressWarnings("PMD.LongVariable")
 @Service
 public class TalkService {
 
-    @SuppressWarnings("PMD.LongVariable")
     private static final LocalTime MORNINGSESSIONBEGIN = LocalTime.of(9, 0);
     private static final LocalTime MORNINGSESSIONEND = LocalTime.of(12, 0);
-    @SuppressWarnings("PMD.LongVariable")
     private static final LocalTime AFTERNOONSESSIONBEGIN = LocalTime.of(13, 0);
-    @SuppressWarnings("PMD.LongVariable")
     private static final LocalTime AFTERNOONSESSIONEND = LocalTime.of(17, 0);
+    private static final LocalTime NETWORKINGEVENTBEGIN = LocalTime.of(16, 0);
 
-    private transient LocalTime lastTalkEnd = LocalTime.of(16, 0);
+    private transient LocalTime lastTalkEnd = NETWORKINGEVENTBEGIN;
 
     private static final String TIMEFORMAT = "hh:mm a";
 
@@ -34,8 +33,9 @@ public class TalkService {
         return repository.findAll();
     }
 
-    public List<List<List<String>>> splitTalksIntoTracks() {
-        final List<Talk> allTalks = new ArrayList<>(this.findAllTalks());
+    public List<List<List<String>>> splitTalksIntoTracks(final List<Talk> talksFromDatabase) {
+        lastTalkEnd = NETWORKINGEVENTBEGIN;
+        final List<Talk> allTalks = new ArrayList<>(talksFromDatabase);
         final List<List<List<String>>> tracks = new ArrayList<>();
 
         while (!allTalks.isEmpty()) {
@@ -57,6 +57,7 @@ public class TalkService {
                 }
             }
         }
+
         return tracks;
     }
 
@@ -94,6 +95,7 @@ public class TalkService {
                 talkName,
                 ""
         )));
+        lastTalkEnd = Stream.of(lastTalkEnd, sessionTime).max(LocalTime::compareTo).get();
         return session;
     }
 }
