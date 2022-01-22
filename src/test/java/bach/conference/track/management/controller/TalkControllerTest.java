@@ -32,4 +32,14 @@ class TalkControllerTest {
 
         verify(service).findAllTalks();
     }
+
+    @Test
+    void tracksWithTalks() throws Exception {
+        mvc.perform(get("/tracks"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("tracks"))
+                .andExpect(content().string(containsString("Tracks")));
+
+        verify(service).splitTalksIntoTracks();
+    }
 }

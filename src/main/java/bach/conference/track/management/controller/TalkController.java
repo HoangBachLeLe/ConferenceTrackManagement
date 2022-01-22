@@ -17,4 +17,10 @@ public class TalkController {
         model.addAttribute("allTalks", service.findAllTalks());
         return "index";
     }
+
+    @GetMapping("/tracks")
+    public String tracksWithTalks(final Model model) {
+        model.addAttribute("tracksWithTalks", service.splitTalksIntoTracks());
+        return "tracks";
+    }
 }

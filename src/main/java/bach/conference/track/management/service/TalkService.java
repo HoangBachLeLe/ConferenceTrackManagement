@@ -39,8 +39,11 @@ public class TalkService {
         final List<List<List<String>>> tracks = new ArrayList<>();
 
         while (!allTalks.isEmpty()) {
-            tracks.add(this.splitTalksIntoSession(allTalks, MORNINGSESSIONBEGIN, MORNINGSESSIONEND, "Lunch"));
-            tracks.add(this.splitTalksIntoSession(allTalks, AFTERNOONSESSIONBEGIN, AFTERNOONSESSIONEND, "Networking Event"));
+            final List<List<String>> morningTracks = this.splitTalksIntoSession(allTalks, MORNINGSESSIONBEGIN, MORNINGSESSIONEND, "Lunch");
+            final List<List<String>> afternoonTracks =
+                    this.splitTalksIntoSession(allTalks, AFTERNOONSESSIONBEGIN, AFTERNOONSESSIONEND, "Networking Event");
+            morningTracks.addAll(afternoonTracks); //NOPMD
+            tracks.add(morningTracks);
         }
 
         for (final List<List<String>> track : tracks) {

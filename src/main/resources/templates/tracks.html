@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+  <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="/webjars/bootstrap-icons/font/bootstrap-icons.css"/>
+  <title>Tracks</title>
+</head>
+<body>
+
+<div class="container">
+  <div class="container-fluid bg-light p-5">
+    <h1>Tracks</h1>
+    <a class="btn btn-primary" href="/">Add new tracks or delete tracks</a>
+  </div>
+
+  <table class="table caption-top my-4" th:each="tracks,index: ${tracksWithTalks}">
+    <caption th:text="|Track ${index.count}|">Track 1</caption>
+    <thead class="table-dark">
+    <tr>
+      <th scope="col">Time</th>
+      <th scope="col">Title</th>
+      <th scope="col">Duration</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="talks,index: ${tracks}">
+      <td class="text-center" th:text="${talks.get(0)}">10:45 AM</td>
+      <td th:text="${talks.get(1)}">Overdoing it in Python</td>
+      <td th:text="${talks.get(2).isBlank()} ? '' : ${talks.get(2)} + ' min'">30 min</td>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
