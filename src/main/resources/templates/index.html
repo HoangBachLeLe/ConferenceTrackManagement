@@ -30,6 +30,66 @@
     <a class="btn btn-primary" href="/tracks">Split talks into tracks</a>
   </div>
 
+  <h3 class="py-2">Add new talk</h3>
+  <form
+      class="row gy-2 gx-3 align-items-center"
+      method="post"
+      action="#"
+      th:action="@{/addTalk}"
+      th:object="${talkForm}"
+  >
+    <div class="row">
+      <div class="col-auto">
+        <div class="form-floating">
+          <input
+              type="text"
+              class="form-control text-center"
+              id="title"
+              placeholder="title"
+              th:field="*{title}"
+              th:classappend="${#fields.hasErrors('title')} ? 'is-invalid' : ''"
+          >
+          <div
+              class="invalid-feedback"
+              th:if="${#fields.hasErrors('title')}"
+              th:errors="*{title}"
+          ></div>
+          <label for="title">Enter a title</label>
+        </div>
+      </div>
+
+      <div class="col-auto">
+        <div class="input-group">
+          <div class="form-floating">
+            <input
+                type="text"
+                class="form-control text-center"
+                id="duration"
+                placeholder="Duration"
+                th:field="*{duration}"
+                th:classappend="${#fields.hasErrors('duration')} ? 'is-invalid' : ''"
+            />
+            <label for="duration">Enter a duration</label>
+            <div
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('duration')}"
+                th:errors="*{duration}"
+            ></div>
+          </div>
+          <span class="input-group-text">Minutes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-end">
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Add talk</button>
+      </div>
+    </div>
+  </form>
+
+  <hr>
+
   <table class="table caption-top my-4">
     <caption>List of talks</caption>
     <thead class="table-dark">

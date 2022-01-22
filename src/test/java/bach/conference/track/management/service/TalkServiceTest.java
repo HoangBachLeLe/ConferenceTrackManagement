@@ -2,6 +2,7 @@ package bach.conference.track.management.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -158,5 +159,24 @@ class TalkServiceTest {
         assertThrows(TalkNotFoundException.class,
                 () -> service.getTalk(talkId)
         );
+    }
+
+    @Test
+    void deleteTalk() {
+        long talkId = 1L;
+
+        service.deleteTalk(talkId);
+
+        verify(repository).deleteById(talkId);
+    }
+
+    @Test
+    void saveTalk() {
+        String title = "Talk 1";
+        long duration = 40L;
+
+        service.saveTalk(title, duration);
+
+        verify(repository).save(any(Talk.class));
     }
 }
