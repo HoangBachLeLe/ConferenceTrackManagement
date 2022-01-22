@@ -1,0 +1,6 @@
+version: '3'
+services:
+  conference_track_management:
+    build: .
+    ports:
+      - "8080:8080"
