@@ -42,7 +42,7 @@ class TalkControllerTest {
                 .andExpect(view().name("tracks"))
                 .andExpect(content().string(containsString("Tracks")));
 
-        verify(service).splitTalksIntoTracks(any(List.class));
+        verify(service).splitTalksIntoTracks(any());
     }
 
     @Test
@@ -52,6 +52,6 @@ class TalkControllerTest {
                 .andExpect(view().name("tracks"))
                 .andExpect(content().string(containsString("Tracks")));
 
-        verify(service).splitTalksIntoTracks(any(List.class));
+        verify(service).splitTalksIntoTracks(any());
     }
 }

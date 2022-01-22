@@ -1,13 +1,16 @@
 package bach.conference.track.management.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import bach.conference.track.management.exception.TalkNotFoundException;
 import bach.conference.track.management.model.Talk;
 import bach.conference.track.management.repository.TalkRepository;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -129,6 +132,31 @@ class TalkServiceTest {
                 List.of("09:00 AM", "Talk 1", "30"),
                 List.of("12:00 PM", "Lunch", ""),
                 List.of("04:00 PM", "Networking Event", "")
+        );
+    }
+
+    @DisplayName("Talk is found")
+    @Test
+    void getTalk1() {
+        long talkId = 1L;
+        Talk talk = new Talk("Talk 1", 30L);
+        when(repository.findById(talkId)).thenReturn(
+                Optional.of(talk)
+        );
+
+        Talk result = service.getTalk(talkId);
+
+        verify(repository).findById(talkId);
+        assertThat(result).isEqualTo(talk);
+    }
+
+    @DisplayName("Talk is not found")
+    @Test
+    void getTalk2() {
+        long talkId = 1L;
+
+        assertThrows(TalkNotFoundException.class,
+                () -> service.getTalk(talkId)
         );
     }
 }

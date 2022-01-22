@@ -2,17 +2,22 @@ package bach.conference.track.management.controller;
 
 import bach.conference.track.management.model.Talk;
 import bach.conference.track.management.service.TalkService;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.Collections;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @AllArgsConstructor
 public class TalkController {
 
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     private final TalkService service;
 
     @GetMapping("/")
@@ -37,5 +42,16 @@ public class TalkController {
                 allTalks
         ));
         return "tracks";
+    }
+
+    @PostMapping("/deleteTalk/{id}")
+    public String deleteTalk(@PathVariable("id") final long talkId, final RedirectAttributes redirectAttr) {
+        final Talk talk = service.getTalk(talkId);
+        service.deleteTalk(talkId);
+        redirectAttr.addFlashAttribute(
+                "message",
+                "Talk '" + talk.getTitle() + "' (" + talk.getDuration() + " min) was deleted." //NOPMD
+        );
+        return "redirect:/";
     }
 }

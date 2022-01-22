@@ -12,6 +12,18 @@
 </head>
 <body>
 
+<div class="container" th:if="${message}">
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <h4 class="alert-heading">
+      <i class="bi bi-exclamation-triangle"></i> List was updated
+    </h4>
+    <p th:text="${message}">
+      Talk was added.
+    </p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+</div>
+
 <div class="container">
   <div class="container-fluid bg-light p-5">
     <h1>Conference Track Management</h1>

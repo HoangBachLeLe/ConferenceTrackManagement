@@ -1,5 +1,6 @@
 package bach.conference.track.management.service;
 
+import bach.conference.track.management.exception.TalkNotFoundException;
 import bach.conference.track.management.model.Talk;
 import bach.conference.track.management.repository.TalkRepository;
 import java.time.LocalTime;
@@ -97,5 +98,14 @@ public class TalkService {
         )));
         lastTalkEnd = Stream.of(lastTalkEnd, sessionTime).max(LocalTime::compareTo).get();
         return session;
+    }
+
+    public Talk getTalk(final long talkId) {
+        return repository.findById(talkId) //NOPMD
+                .orElseThrow(() -> new TalkNotFoundException("Talk by id " + talkId + " was not found"));
+    }
+
+    public void deleteTalk(final long talkId) {
+        repository.deleteById(talkId);
     }
 }
