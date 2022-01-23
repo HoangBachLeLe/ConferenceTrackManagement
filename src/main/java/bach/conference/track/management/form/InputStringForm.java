@@ -11,7 +11,7 @@ import org.springframework.validation.BindingResult;
 @Data
 public class InputStringForm {
 
-    @Pattern(regexp = "([a-zA-Z]+\\s?)+(\\d{1,2}min|lightning)", message = "([a-zA-Z]+\\s?)+\\s(\\d{1,2}min)|(lightning)")
+    @Pattern(regexp = "([a-zA-Z.():-]+\\s?)+(\\d{1,2}min|lightning)", message = "([a-zA-Z.():-]+\\s?)+(\\d{1,2}min|lightning)")
     private final String inputString;
 
     public void validate(final BindingResult bindingResult, final List<Talk> allTalks) {

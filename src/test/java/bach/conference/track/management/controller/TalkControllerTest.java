@@ -81,7 +81,7 @@ class TalkControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("index"))
                 .andExpect(content().string(containsString("Conference Track Management")))
-                .andExpect(content().string(containsString("([a-zA-Z]+?\\s)+")))
+                .andExpect(content().string(containsString("([a-zA-Z.():-]+\\s?)+")))
                 .andExpect(content().string(containsString("The duration must be bigger than 0!")))
                 .andExpect(content().string(containsString("The duration must be equal or smaller than 60!")))
                 .andExpect(content().string(containsString("The duration must be integer!")))
@@ -109,7 +109,7 @@ class TalkControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("index"))
                 .andExpect(content().string(containsString("Conference Track Management")))
-                .andExpect(content().string(containsString("([a-zA-Z]+\\s?)+\\s(\\d{1,2}min)|(lightning)")))
+                .andExpect(content().string(containsString("([a-zA-Z.():-]+\\s?)+(\\d{1,2}min|lightning)")))
                 .andExpect(content().string(not(containsString("New talk was added"))));
 
         verify(service, never()).addTalkByInputString(anyString());

@@ -11,7 +11,7 @@ import org.springframework.validation.BindingResult;
 @Data
 public class TalkForm {
 
-    @Pattern(regexp = "([a-zA-Z]+\\s?)+", message = "([a-zA-Z]+?\\s)+")
+    @Pattern(regexp = "([a-zA-Z.():-]+\\s?)+", message = "([a-zA-Z.():-]+\\s?)+")
     private final String title;
 
     @Min(value = 1, message = "The duration must be bigger than 0!")
