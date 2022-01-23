@@ -171,6 +171,13 @@ class TalkServiceTest {
     }
 
     @Test
+    void deleteAllTalks() {
+        service.deleteAllTalks();
+
+        verify(repository).deleteAll();
+    }
+
+    @Test
     void saveTalk() {
         String title = "Talk 1";
         long duration = 40L;

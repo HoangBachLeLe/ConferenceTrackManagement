@@ -110,6 +110,10 @@ public class TalkService {
         repository.deleteById(talkId);
     }
 
+    public void deleteAllTalks() {
+        repository.deleteAll();
+    }
+
     public void saveTalk(final String title, final long duration) {
         repository.save(new Talk(title, duration));
     }

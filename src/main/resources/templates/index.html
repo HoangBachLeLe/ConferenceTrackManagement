@@ -180,6 +180,76 @@
     </tr>
     </tbody>
   </table>
+
+  <div class="row justify-content-end">
+    <div class="col-auto">
+      <!-- Button trigger modal -->
+      <button
+          type="button"
+          class="btn btn-danger btn-lg"
+          data-bs-toggle="modal"
+          data-bs-target="#staticBackdropCart"
+      >
+        <i class="bi bi-trash"></i> Delete all talks
+      </button>
+    </div>
+  </div>
+
+  <br class="py-5">
+  <br class="py-5">
+</div>
+
+<!-- Modal -->
+<div
+    class="modal fade"
+    id="staticBackdropCart"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabelCart"
+    aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabelCart"><i class="bi bi-trash"></i> Delete all
+          talks</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+        </button>
+      </div>
+      <div class="modal-body">
+
+        Are you sure you want to delete all talks? All of them will be permanently deleted.
+
+        <br>
+        <br>
+
+        <ul
+            class="list-group list-group-numbered"
+        >
+          <li class="list-group-item" th:each="talk: ${allTalks}">
+            <span th:text="${talk.getTitle()}">Spring Magic</span>
+          </li>
+        </ul>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+        <form method="post" action="#" th:action="@{/deleteAllTalks}">
+          <button
+              class="btn btn-danger float-right"
+              type="submit"
+          >
+            <i class="bi bi-trash"></i> delete <span th:text="${allTalks.size()}">6</span>
+            <span th:text="${allTalks.size() == 1 ? 'talk' : 'talks'}"></span>
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </div>
 </div>
 
 <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>

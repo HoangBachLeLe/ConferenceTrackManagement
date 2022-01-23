@@ -53,7 +53,7 @@ public class EndToEndTests {
         );
         assertThat(response.getStatusCode()).isEqualTo(FOUND);
 
-        // check if talk 'Spring Boot' is in table
+        // check that talk 'Spring Boot' is in table
         response = this.template.getForEntity("/", String.class);
         assertThat(response.getStatusCode()).isEqualTo(OK);
         assertThat(response.getBody())
@@ -67,7 +67,7 @@ public class EndToEndTests {
         );
         assertThat(response.getStatusCode()).isEqualTo(FOUND);
 
-        // check if talk 'Spring Boot' is not in table
+        // check that talk 'Spring Boot' is not in table
         response = this.template.getForEntity("/", String.class);
         assertThat(response.getStatusCode()).isEqualTo(OK);
         assertThat(response.getBody())
@@ -83,11 +83,23 @@ public class EndToEndTests {
         );
         assertThat(response.getStatusCode()).isEqualTo(FOUND);
 
-        // check if talk 'Spring Boot' is in table
+        // check that talk 'Spring Boot' is in table
         response = this.template.getForEntity("/", String.class);
         assertThat(response.getStatusCode()).isEqualTo(OK);
         assertThat(response.getBody())
                 .contains("Spring Boot");
+
+        // delete all talks
+        response = template.postForEntity(
+                "/deleteAllTalks", null, null, 0
+        );
+        assertThat(response.getStatusCode()).isEqualTo(FOUND);
+
+        // check that there are no talks
+        response = this.template.getForEntity("/tracks", String.class);
+        assertThat(response.getStatusCode()).isEqualTo(OK);
+        assertThat(response.getBody())
+                .contains("There are no talks!");
     }
 
     @Test

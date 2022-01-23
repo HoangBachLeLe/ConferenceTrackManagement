@@ -4,8 +4,10 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -13,7 +15,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import bach.conference.track.management.model.Talk;
+import bach.conference.track.management.repository.TalkRepository;
 import bach.conference.track.management.service.TalkService;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -57,6 +62,30 @@ class TalkControllerTest {
                 .andExpect(content().string(containsString("Tracks")));
 
         verify(service).splitTalksIntoTracks(any());
+    }
+
+    @Test
+    void deleteTalk() throws Exception {
+        long talkId = 10L;
+        when(service.getTalk(talkId)).thenReturn(new Talk("Spring", 30L));
+
+        mvc.perform(post("/deleteTalk/{id}", talkId))
+                .andExpect(status().isFound())
+                .andExpect(redirectedUrl("/"))
+                .andExpect(view().name("redirect:/"));
+
+        verify(service).getTalk(talkId);
+        verify(service).deleteTalk(talkId);
+    }
+
+    @Test
+    void deleteAllTalks() throws Exception {
+        mvc.perform(post("/deleteAllTalks"))
+                .andExpect(status().isFound())
+                .andExpect(redirectedUrl("/"))
+                .andExpect(view().name("redirect:/"));
+
+        verify(service).deleteAllTalks();
     }
 
     @Test

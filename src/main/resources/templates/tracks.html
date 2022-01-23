@@ -44,6 +44,10 @@
       Order</a>
   </div>
 
+  <h3 th:if="${tracksWithTalks.isEmpty()}" style="color: red">
+    There are no talks!
+  </h3>
+
   <table class="table caption-top my-4" th:each="tracks,index: ${tracksWithTalks}">
     <caption th:text="|Track ${index.count}|">Track 1</caption>
     <thead class="table-dark">

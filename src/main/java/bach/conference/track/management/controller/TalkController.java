@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @Controller
 @AllArgsConstructor
 public class TalkController {
@@ -57,6 +58,16 @@ public class TalkController {
         redirectAttr.addFlashAttribute(
                 "message",
                 "Talk '" + talk.getTitle() + "' (" + talk.getDuration() + " min) was deleted." //NOPMD
+        );
+        return "redirect:/";
+    }
+
+    @PostMapping("/deleteAllTalks")
+    public String deleteAllTalks(final RedirectAttributes redirectAttr) {
+        service.deleteAllTalks();
+        redirectAttr.addFlashAttribute(
+                "message",
+                "All talks were deleted."
         );
         return "redirect:/";
     }
