@@ -65,6 +65,8 @@ public class TalkController {
     @PostMapping("/addTalk")
     public String addTalk(@Valid final TalkForm form, final BindingResult bindingResult, final Model model,
             final RedirectAttributes redirectAttr) {
+        form.validate(bindingResult, this.service.findAllTalks());
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("inputStringForm", new InputStringForm("Spring lightning"));
             model.addAttribute("allTalks", service.findAllTalks());
@@ -88,6 +90,8 @@ public class TalkController {
     @PostMapping("/addTalkByInputString")
     public String addTalkByInputString(@Valid final InputStringForm form, final BindingResult bindingResult, final Model model,
             final RedirectAttributes redirectAttr) {
+        form.validate(bindingResult, this.service.findAllTalks());
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("talkForm", new TalkForm("", ""));
             model.addAttribute("allTalks", service.findAllTalks());
