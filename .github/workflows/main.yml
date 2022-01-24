@@ -1,5 +1,5 @@
 name: CI
-on: [ push, pull_request ]
+on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,16 +17,3 @@ jobs:
         run: ./gradlew check
       - name: Build with Gradle
         run: ./gradlew build
-        
-  automerge:
-    needs: build
-    runs-on: ubuntu-latest
-
-    permissions:
-      pull-requests: write
-      contents: write
-
-    steps:
-      - uses: fastify/github-action-merge-dependabot@v3.0.2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
