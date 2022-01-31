@@ -15,15 +15,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class TalkService {
 
-    private static final LocalTime MORNINGSESSIONBEGIN = LocalTime.of(9, 0);
-    private static final LocalTime MORNINGSESSIONEND = LocalTime.of(12, 0);
-    private static final LocalTime AFTERNOONSESSIONBEGIN = LocalTime.of(13, 0);
-    private static final LocalTime AFTERNOONSESSIONEND = LocalTime.of(17, 0);
-    private static final LocalTime NETWORKINGEVENTBEGIN = LocalTime.of(16, 0);
+    private static final LocalTime MORNING_SESSION_BEGIN = LocalTime.of(9, 0);
+    private static final LocalTime MORNING_SESSION_END = LocalTime.of(12, 0);
+    private static final LocalTime AFTERNOON_SESSION_BEGIN = LocalTime.of(13, 0);
+    private static final LocalTime AFTERNOON_SESSION_END = LocalTime.of(17, 0);
+    private static final LocalTime NETWORKING_EVENT_BEGIN = LocalTime.of(16, 0);
 
-    private transient LocalTime lastTalkEnd = NETWORKINGEVENTBEGIN;
+    private transient LocalTime lastTalkEnd = NETWORKING_EVENT_BEGIN;
 
-    private static final String TIMEFORMAT = "hh:mm a";
+    private static final String TIME_FORMAT = "hh:mm a";
 
     private final transient TalkRepository repository;
 
@@ -36,25 +36,26 @@ public class TalkService {
     }
 
     public List<List<List<String>>> splitTalksIntoTracks(final List<Talk> talksFromDatabase) {
-        lastTalkEnd = NETWORKINGEVENTBEGIN;
+        lastTalkEnd = NETWORKING_EVENT_BEGIN;
         final List<Talk> allTalks = new ArrayList<>(talksFromDatabase);
         final List<List<List<String>>> tracks = new ArrayList<>();
 
         while (!allTalks.isEmpty()) {
-            final List<List<String>> morningTracks = this.splitTalksIntoSession(allTalks, MORNINGSESSIONBEGIN, MORNINGSESSIONEND, "Lunch");
+            final List<List<String>> morningTracks =
+                    this.splitTalksIntoSession(allTalks, MORNING_SESSION_BEGIN, MORNING_SESSION_END, "Lunch");
             final List<List<String>> afternoonTracks =
-                    this.splitTalksIntoSession(allTalks, AFTERNOONSESSIONBEGIN, AFTERNOONSESSIONEND, "Networking Event");
+                    this.splitTalksIntoSession(allTalks, AFTERNOON_SESSION_BEGIN, AFTERNOON_SESSION_END, "Networking Event");
             morningTracks.addAll(afternoonTracks); //NOPMD
             tracks.add(morningTracks);
         }
 
         for (final List<List<String>> track : tracks) {
             for (final List<String> talks : track) {
-                final String replaceTime = AFTERNOONSESSIONEND.format(DateTimeFormatter.ofPattern(TIMEFORMAT));
+                final String replaceTime = AFTERNOON_SESSION_END.format(DateTimeFormatter.ofPattern(TIME_FORMAT));
                 if (talks.contains(replaceTime)) {
                     talks.set(
                             talks.indexOf(replaceTime),
-                            lastTalkEnd.format(DateTimeFormatter.ofPattern(TIMEFORMAT))
+                            lastTalkEnd.format(DateTimeFormatter.ofPattern(TIME_FORMAT))
                     );
                 }
             }
@@ -76,7 +77,7 @@ public class TalkService {
 
             if (!sessionTimeNew.isAfter(sessionEnd)) {
                 session.add(List.of(
-                        sessionTime.format(DateTimeFormatter.ofPattern(TIMEFORMAT)),
+                        sessionTime.format(DateTimeFormatter.ofPattern(TIME_FORMAT)),
                         talk.getTitle(),
                         talk.getDuration().toString()
                 ));
@@ -84,7 +85,7 @@ public class TalkService {
                 sessionTime = sessionTimeNew;
             } else {
                 session.add(new ArrayList<>(List.of(
-                        sessionEnd.format(DateTimeFormatter.ofPattern(TIMEFORMAT)),
+                        sessionEnd.format(DateTimeFormatter.ofPattern(TIME_FORMAT)),
                         talkName,
                         ""
                 )));
@@ -93,7 +94,7 @@ public class TalkService {
             }
         }
         session.add(new ArrayList<>(List.of(
-                sessionEnd.format(DateTimeFormatter.ofPattern(TIMEFORMAT)),
+                sessionEnd.format(DateTimeFormatter.ofPattern(TIME_FORMAT)),
                 talkName,
                 ""
         )));
