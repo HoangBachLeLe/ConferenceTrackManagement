@@ -15,95 +15,56 @@ Note that depending on how you choose to complete this problem, your solution ma
 
 ## Test input
 
-Writing Fast Tests Against Enterprise Rails 60min
-
-Overdoing it in Python 45min
-
-Lua for the Masses 30min
-
-Ruby Errors from Mismatched Gem Versions 45min
-
-Common Ruby Errors 45min
-
-Rails for Python Developers lightning
-
-Communicating Over Distance 60min
-
-Accounting-Driven Development 45min
-
-Woah 30min
-
-Sit Down and Write 30min
-
-Pair Programming vs Noise 45min
-
-Rails Magic 60min
-
-Ruby on Rails: Why We Should Move On 60min
-
-Clojure Ate Scala (on my project) 45min
-
-Programming in the Boondocks of Seattle 30min
-
-Ruby vs. Clojure for Back-End Development 30min
-
-Ruby on Rails Legacy App Maintenance 60min
-
-A World Without HackerNews 30min
-
-User Interface CSS in Rails Apps 30min
+Writing Fast Tests Against Enterprise Rails 60min</br>
+Overdoing it in Python 45min</br>
+Lua for the Masses 30min</br>
+Ruby Errors from Mismatched Gem Versions 45min</br>
+Common Ruby Errors 45min</br>
+Rails for Python Developers lightning</br>
+Communicating Over Distance 60min</br>
+Accounting-Driven Development 45min</br>
+Woah 30min</br>
+Sit Down and Write 30min</br>
+Pair Programming vs Noise 45min</br>
+Rails Magic 60min</br>
+Ruby on Rails: Why We Should Move On 60min</br>
+Clojure Ate Scala (on my project) 45min</br>
+Programming in the Boondocks of Seattle 30min</br>
+Ruby vs. Clojure for Back-End Development 30min</br>
+Ruby on Rails Legacy App Maintenance 60min</br>
+A World Without HackerNews 30min</br>
+User Interface CSS in Rails Apps 30min</br>
 
 ## Test output
 
 Track 1:
 
-09:00AM Writing Fast Tests Against Enterprise Rails 60min
-
-10:00AM Communicating Over Distance 60min
-
-11:00AM Rails Magic 60min
-
-12:00PM Lunch
-
-01:00PM Ruby on Rails: Why We Should Move On 60min
-
-02:00PM Common Ruby Errors 45min
-
-02:45PM Accounting-Driven Development 45min
-
-03:30PM Pair Programming vs Noise 45min
-
-04:15PM User Interface CSS in Rails Apps 30min
-
-04:45PM Rails for Python Developers lightning
-
-04:50PM Networking Event
+09:00AM Writing Fast Tests Against Enterprise Rails 60min</br>
+10:00AM Communicating Over Distance 60min</br>
+11:00AM Rails Magic 60min</br>
+12:00PM Lunch</br>
+01:00PM Ruby on Rails: Why We Should Move On 60min</br>
+02:00PM Common Ruby Errors 45min</br>
+02:45PM Accounting-Driven Development 45min</br>
+03:30PM Pair Programming vs Noise 45min</br>
+04:15PM User Interface CSS in Rails Apps 30min</br>
+04:45PM Rails for Python Developers lightning</br>
+04:50PM Networking Event</br>
 
 Track 2:
 
-09:00AM Ruby on Rails Legacy App Maintenance 60min
-
-10:00AM Overdoing it in Python 45min
-
-10:45AM Ruby Errors from Mismatched Gem Versions 45min
-
-11:30AM Lua for the Masses 30min
-
-12:00PM Lunch
-
-01:00PM Clojure Ate Scala (on my project) 45min
-
-01:45PM Woah 30min
-
-02:15PM Sit Down and Write 30min
-
-02:45PM Programming in the Boondocks of Seattle 30min
-
-03:15PM Ruby vs. Clojure for Back-End Development 30min
-
-03:45PM A World Without HackerNews 30min
-
-04:15PM Networking Event
+09:00AM Ruby on Rails Legacy App Maintenance 60min</br>
+10:00AM Overdoing it in Python 45min</br>
+10:45AM Ruby Errors from Mismatched Gem Versions 45min</br>
+11:30AM Lua for the Masses 30min</br>
+12:00PM Lunch</br>
+01:00PM Clojure Ate Scala (on my project) 45min</br>
+01:45PM Woah 30min</br>
+02:15PM Sit Down and Write 30min</br>
+02:45PM Programming in the Boondocks of Seattle 30min</br>
+03:15PM Ruby vs. Clojure for Back-End Development 30min</br>
+03:45PM A World Without HackerNews 30min</br>
+04:15PM Networking Event</br>
 
 ---
 
