@@ -1,5 +1,6 @@
 # Conference Track Management
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1f9664d7dba64237b469b544070db8fe)](https://app.codacy.com/gh/HoangBachLeLe/ConferenceTrackManagement?utm_source=github.com&utm_medium=referral&utm_content=HoangBachLeLe/ConferenceTrackManagement&utm_campaign=Badge_Grade_Settings)
 [![CI](https://github.com/HoangBachLeLe/ConferenceTrackManagement/actions/workflows/main.yml/badge.svg)](https://github.com/HoangBachLeLe/ConferenceTrackManagement/actions/workflows/main.yml)
 
 You are planning a big programming conference and have received many proposals which have passed the initial screen process but you're having trouble fitting them into the time constraints of the day -- there are so many possibilities! So you write a program to do it for you.
