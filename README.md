@@ -5,6 +5,7 @@
 [![Code Grade](https://api.codiga.io/project/30863/status/svg)](https://www.codiga.io)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/1f9664d7dba64237b469b544070db8fe)](https://app.codacy.com/gh/HoangBachLeLe/ConferenceTrackManagement?utm_source=github.com&utm_medium=referral&utm_content=HoangBachLeLe/ConferenceTrackManagement&utm_campaign=Badge_Grade_Settings)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/f54e10dbb72744ce8edf6dd33418293b)](https://www.codacy.com/gh/HoangBachLeLe/ConferenceTrackManagement/dashboard?utm_source=github.com&utm_medium=referral&utm_content=HoangBachLeLe/ConferenceTrackManagement&utm_campaign=Badge_Coverage)
+[![codecov](https://codecov.io/gh/HoangBachLeLe/ConferenceTrackManagement/branch/main/graph/badge.svg?token=QYVR67RWCJ)](https://codecov.io/gh/HoangBachLeLe/ConferenceTrackManagement)
 
 You are planning a big programming conference and have received many proposals which have passed the initial screen process but you're having trouble fitting them into the time constraints of the day -- there are so many possibilities! So you write a program to do it for you.
 
