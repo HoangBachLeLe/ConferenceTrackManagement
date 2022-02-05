@@ -1,0 +1,25 @@
+name: codecov
+
+on: [ "push" ]
+
+jobs:
+  codecov:
+    runs-on: ubuntu-latest
+    name: codecov
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+          distribution: 'temurin'
+      - name: gradle check
+        run: ./gradlew check
+
+      - uses: codecov/codecov-action@v2.1.0
+        with:
+          files: ./build/reports/jacoco/test/jacocoTestReport.xml
+          name: codecov-umbrella
+          fail_ci_if_error: true
+          verbose: true
