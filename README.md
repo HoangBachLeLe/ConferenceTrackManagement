@@ -7,7 +7,7 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/f54e10dbb72744ce8edf6dd33418293b)](https://www.codacy.com/gh/HoangBachLeLe/ConferenceTrackManagement/dashboard?utm_source=github.com&utm_medium=referral&utm_content=HoangBachLeLe/ConferenceTrackManagement&utm_campaign=Badge_Coverage)
 [![codecov](https://codecov.io/gh/HoangBachLeLe/ConferenceTrackManagement/branch/main/graph/badge.svg?token=QYVR67RWCJ)](https://codecov.io/gh/HoangBachLeLe/ConferenceTrackManagement)
 
-The application is available on heroku: https://conference-track-management.herokuapp.com/
+The application is deployed on heroku: https://conference-track-management.herokuapp.com/
 
 You are planning a big programming conference and have received many proposals which have passed the initial screen process but you're having trouble fitting them into the time constraints of the day -- there are so many possibilities! So you write a program to do it for you.
 
