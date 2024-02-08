@@ -36,7 +36,7 @@ jobs:
         with:
           image-ref: '${{ env.REGISTRY }}/${{ steps.tag.outputs.tag-name }}:latest'
           format: 'template'
-          template: trivy2markdown.tpl
+          template: @trivy2markdown.tpl
           exit-code: '1'
           ignore-unfixed: true
           vuln-type: 'os,library'
