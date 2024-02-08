@@ -1,6 +1,8 @@
 # Coding Challenge: Conference Track Management
 
-[![ContinuousIntegration](https://github.com/HoangBachLeLe/ConferenceTrackManagement/actions/workflows/continuous-integration.yaml/badge.svg)](https://github.com/HoangBachLeLe/ConferenceTrackManagement/actions/workflows/main.yml)
+[![Continuous Integration](https://github.com/HoangBachLeLe/ConferenceTrackManagement/actions/workflows/continuous-integration.yaml/badge.svg)](https://github.com/HoangBachLeLe/ConferenceTrackManagement/actions/workflows/continuous-integration.yaml)
+[![Create and Publish Container Image](https://github.com/HoangBachLeLe/ConferenceTrackManagement/actions/workflows/build-container-image.yaml/badge.svg)](https://github.com/HoangBachLeLe/ConferenceTrackManagement/actions/workflows/build-container-image.yaml)
+[![ContinuousIntegration](https://github.com/HoangBachLeLe/ConferenceTrackManagement/actions/workflows/trivy-image-scan.yaml/badge.svg)](https://github.com/HoangBachLeLe/ConferenceTrackManagement/actions/workflows/trivy-image-scan.yaml)
 
 You are planning a big programming conference and have received many proposals which have passed the initial screen process but you're having trouble fitting them into the time constraints of the day -- there are so many possibilities! So you write a program to do it for you.
 
