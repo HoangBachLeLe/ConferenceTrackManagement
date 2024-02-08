@@ -3,7 +3,7 @@ name: Continuous Integration
 on: [ push, pull_request ]
 
 jobs:
-  build:
+  gradle-check:
     name: Unit Tests and static code analysis
     runs-on: ubuntu-latest
     steps:
