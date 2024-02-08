@@ -1,9 +1,10 @@
 name: Release Drafter
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Create and Publish Container Image"]
+    types: [completed]
 
 permissions:
   contents: read
