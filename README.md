@@ -73,11 +73,7 @@ Track 2:
 ---
 
 ## Preview
-[See template on GitHub Pages](https://hoangbachlele.github.io/ConferenceTrackManagement/src/main/resources/templates/index.html)
-
 ![Preview 1](./preview1.png)
-
-[See template on GitHub Pages](https://hoangbachlele.github.io/ConferenceTrackManagement/src/main/resources/templates/tracks.html)
 
 ![Preview 2](./preview2.png)
 
