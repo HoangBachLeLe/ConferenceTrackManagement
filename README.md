@@ -80,10 +80,11 @@ Track 2:
 ![Preview 2](./preview2.png)
 
 ## How to run the application?
-In order to run the application you need to have Docker and docker-compose installed on your machine. Execute the following command:
+In order to run the application you need to have Docker installed on your machine. Execute the following command:
 
 ```sh
-docker-compose up
+docker pull ghcr.io/hoangbachlele/conferencetrackmanagement:latest
+docker run -p 8080:8080 ghcr.io/hoangbachlele/conferencetrackmanagement:latest
 ```
 
 Then open the web page `http://localhost:8080` in a browser.
