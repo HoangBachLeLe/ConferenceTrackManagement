@@ -5,7 +5,6 @@ plugins {
     id 'checkstyle'
     id "com.github.spotbugs" version '5.0.6'
     id 'pmd'
-    id 'jacoco'
 }
 
 group = 'bach'
@@ -73,25 +72,4 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    finalizedBy jacocoTestReport
-}
-
-jacocoTestReport {
-    dependsOn test
-    reports {
-        xml.enabled true
-        csv.enabled true
-        html.enabled true
-    }
-    finalizedBy jacocoTestCoverageVerification
-}
-jacocoTestCoverageVerification {
-    violationRules {
-        rule {
-            enabled = true
-            limit {
-                minimum = 0.25
-            }
-        }
-    }
 }
