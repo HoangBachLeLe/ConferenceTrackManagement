@@ -1,13 +1,8 @@
-# Conference Track Management
+# Coding Challenge: Conference Track Management
 
-[![CI](https://github.com/HoangBachLeLe/ConferenceTrackManagement/actions/workflows/main.yml/badge.svg)](https://github.com/HoangBachLeLe/ConferenceTrackManagement/actions/workflows/main.yml)
-[![Code Grade](https://api.codiga.io/project/30863/score/svg)](https://www.codiga.io)
-[![Code Grade](https://api.codiga.io/project/30863/status/svg)](https://www.codiga.io)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1f9664d7dba64237b469b544070db8fe)](https://app.codacy.com/gh/HoangBachLeLe/ConferenceTrackManagement?utm_source=github.com&utm_medium=referral&utm_content=HoangBachLeLe/ConferenceTrackManagement&utm_campaign=Badge_Grade_Settings)
-[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/f54e10dbb72744ce8edf6dd33418293b)](https://www.codacy.com/gh/HoangBachLeLe/ConferenceTrackManagement/dashboard?utm_source=github.com&utm_medium=referral&utm_content=HoangBachLeLe/ConferenceTrackManagement&utm_campaign=Badge_Coverage)
-[![codecov](https://codecov.io/gh/HoangBachLeLe/ConferenceTrackManagement/branch/main/graph/badge.svg?token=QYVR67RWCJ)](https://codecov.io/gh/HoangBachLeLe/ConferenceTrackManagement)
-
-The application is deployed on heroku: https://conference-track-management.herokuapp.com/
+[![Continuous Integration](https://github.com/HoangBachLeLe/ConferenceTrackManagement/actions/workflows/continuous-integration.yaml/badge.svg)](https://github.com/HoangBachLeLe/ConferenceTrackManagement/actions/workflows/continuous-integration.yaml)
+[![Create and Publish Container Image](https://github.com/HoangBachLeLe/ConferenceTrackManagement/actions/workflows/build-container-image.yaml/badge.svg)](https://github.com/HoangBachLeLe/ConferenceTrackManagement/actions/workflows/build-container-image.yaml)
+[![ContinuousIntegration](https://github.com/HoangBachLeLe/ConferenceTrackManagement/actions/workflows/trivy-image-scan.yaml/badge.svg)](https://github.com/HoangBachLeLe/ConferenceTrackManagement/actions/workflows/trivy-image-scan.yaml)
 
 You are planning a big programming conference and have received many proposals which have passed the initial screen process but you're having trouble fitting them into the time constraints of the day -- there are so many possibilities! So you write a program to do it for you.
 
@@ -87,10 +82,11 @@ Track 2:
 ![Preview 2](./preview2.png)
 
 ## How to run the application?
-In order to run the application you need to have Docker and docker-compose installed on your machine. Execute the following command:
+In order to run the application you need to have Docker installed on your machine. Execute the following command:
 
 ```sh
-docker-compose up
+docker pull ghcr.io/hoangbachlele/conferencetrackmanagement:latest
+docker run -p 8080:8080 ghcr.io/hoangbachlele/conferencetrackmanagement:latest
 ```
 
 Then open the web page `http://localhost:8080` in a browser.

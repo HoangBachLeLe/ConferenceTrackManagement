@@ -1,0 +1,47 @@
+name: Trivy Image Scan
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Create and Publish Container Image"]
+    types: [completed]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  trivy-image-scan:
+    name: Trivy Image Scan
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout template trivy2markdown.tpl
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            trivy2markdown.tpl
+          sparse-checkout-cone-mode: false
+
+      - name: Calculate container tag
+        id: tag
+        run: |
+          tag=${{ github.repository }}
+          echo "tag-name=${tag,,}" >> $GITHUB_OUTPUT
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@0.17.0
+        with:
+          image-ref: '${{ env.REGISTRY }}/${{ steps.tag.outputs.tag-name }}:latest'
+          format: 'template'
+          template: "@trivy2markdown.tpl"
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+          output: trivy.md
+
+      - name: Upload Trivy Results to GitHub Summary
+        if: always()
+        run: cat trivy.md >> $GITHUB_STEP_SUMMARY
