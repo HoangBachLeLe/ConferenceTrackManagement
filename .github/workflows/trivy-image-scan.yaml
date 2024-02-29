@@ -31,7 +31,7 @@ jobs:
           echo "tag-name=${tag,,}" >> $GITHUB_OUTPUT
 
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@0.17.0
+        uses: aquasecurity/trivy-action@0.18.0
         with:
           image-ref: '${{ env.REGISTRY }}/${{ steps.tag.outputs.tag-name }}:latest'
           format: 'template'
